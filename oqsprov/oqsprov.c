@@ -1209,6 +1209,11 @@ int OQS_PROVIDER_ENTRYPOINT_NAME(const OSSL_CORE_HANDLE *handle,
     }
     */
 
+    if (sk_OPENSSL_STRING_num(rt_disabled_algs) > 0) {
+        // Enable rt algo filter
+        rt_algo_filter_enabled = 1;
+    }
+
     // if libctx not yet existing, create a new one
     if (((corebiometh = oqs_bio_prov_init_bio_method()) == NULL) ||
         ((libctx = OSSL_LIB_CTX_new_child(handle, orig_in)) == NULL) ||
